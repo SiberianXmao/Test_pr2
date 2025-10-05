@@ -3,6 +3,7 @@ package com.training.textAnalyzer;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,9 +14,7 @@ public class TextAnalyzer {
     public int countWords(String text) {
         // приводим к нижнему регистру и преобразуем в массив убирая все точки, пробелы и тд
 
-        //String[] words = text.toLowerCase().split("[\\s\\p{Punct}]+");
-        // !!!!
-        String[] words = text.toLowerCase().split("");
+        String[] words = text.toLowerCase().split("[\\s\\p{Punct}]+");
         return words.length;
     }
 
@@ -42,9 +41,10 @@ public class TextAnalyzer {
     public String mostFrequentWord(String text) {
         // приводим к нижнему регистру и преобразуем в массив убирая все точки, пробелы и тд
         String[] words = text.toLowerCase().split("[\\s\\p{Punct}]+");
-        Map<String, Integer> wordFrequency = new HashMap<>();
+        Map<String, Integer> wordFrequency = new LinkedHashMap<>(); // <-- LinkedHashMap
 
         for (String word : words) {
+            if (word.isEmpty()) continue; // защита от пустых токенов
             wordFrequency.put(word, wordFrequency.getOrDefault(word, 0) + 1);
         }
 

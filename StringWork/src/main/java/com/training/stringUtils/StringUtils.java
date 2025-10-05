@@ -1,32 +1,42 @@
 package com.training.stringUtils;
 
-
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 public class StringUtils {
 
     // проверка палиндрома
-    // Ошибка - не убираем пробелы и пунктуацию
     public static boolean isPalindrome(String str) {
         if (str == null) return false;
-        
-        // !!!!!!
-        String clean = str.toLowerCase(); // str.replaceAll("[\\s\\p{Punct}]", "").toLowerCase();
 
+        // Убираем пробелы, пунктуацию и приводим к нижнему регистру
+        String clean = str.replaceAll("[\\s\\p{Punct}]", "").toLowerCase();
+
+        // Переворачиваем и сравниваем
         String reversed = new StringBuilder(clean).reverse().toString();
         return clean.equals(reversed);
     }
 
-    // количество гласных
+    // количество гласных (русские + английские)
     public static int countVowels(String str) {
+        if (str == null || str.isEmpty()) return 0;
 
-        if (str == null) return 0;
+        String vowelsStr = "аеёиоуыэюяAEIOUаеёиоуыэюяaeiou";
+        Set<Character> vowels = new HashSet<>();
+        for (char c : vowelsStr.toCharArray()) {
+            vowels.add(c);
+        }
+
         int count = 0;
-        String vowels = "аеёиоуыэюяaeiou"; // поддержка русских и английских
-        for (char c : str.toLowerCase().toCharArray()) {
-            if (vowels.indexOf(c) != -1) count++;
+        for (char c : str.toCharArray()) {
+            if (vowels.contains(c)) {
+                count++;
+            }
         }
         return count;
     }
+
 
     // переворот строки
     public static String reverse(String str) {
@@ -34,7 +44,7 @@ public class StringUtils {
         return new StringBuilder(str).reverse().toString();
     }
 
-    // перевод в формат "Каждое Слово С Большой Буквы"
+    // каждое слово с заглавной буквы
     public static String toTitleCase(String str) {
         if (str == null || str.isEmpty()) return str;
 
@@ -56,5 +66,4 @@ public class StringUtils {
         if (str == null) return null;
         return str.replaceAll("\\s+", "");
     }
-
 }

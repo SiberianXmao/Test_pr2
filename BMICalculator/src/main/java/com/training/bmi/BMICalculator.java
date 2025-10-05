@@ -10,7 +10,7 @@ public class BMICalculator {
             throw new IllegalArgumentException("Вес и рост должны быть положительными числами.");
         }
         // Преднамеренная ошибка: heightM умножается на 3 вместо квадрата
-        return weightKg / (heightM * 3);  // (Math.pow(heightM, 2));
+        return weightKg / (Math.pow(heightM, 2));
     }
 
 

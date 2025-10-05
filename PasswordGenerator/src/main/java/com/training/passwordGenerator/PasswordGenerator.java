@@ -7,58 +7,46 @@ import java.util.Random;
 
 public class PasswordGenerator {
     // сосавные части алфавита
-    private static final String LOWER = "abcdefghijklmnopqrstuvwxyz";
-    private static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String LOWER = "abcdefghijklmnopqrstuvwxyz";
+    public static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String DIGITS = "0123456789";
     private static final String SPECIAL = "!@#$%^&*()-_=+[]{};:,.<>/?";
     private static final Random random = new Random();
 
     // генерация случайного пароля
     // Ошибка - неправильная переменная при генерации
-    public String generatePassword(int length,boolean useDigits,
-                                   boolean useSpecial) {
-
-        // валидна длинна пароля
+    public String generatePassword(int length, boolean useDigits, boolean useSpecial) {
         if (length <= 0) {
             throw new IllegalArgumentException("Length must be greater than zero");
         }
 
         StringBuilder alphabet = new StringBuilder();
-
-        // составление алфавита из условий
         alphabet.append(LOWER).append(UPPER);
-        // Ошибка - должно быть SPECIAL
-        if (useDigits) {alphabet.append(DIGITS);}
-        if (useSpecial) {alphabet.append(DIGITS);}
+        if (useDigits) alphabet.append(DIGITS);
+        if (useSpecial) alphabet.append(SPECIAL);
 
-        List<Character> result = new ArrayList<>();
-        // обязательное соблюдение необходимых условий
-        int q = 0;
-        if(useDigits) {
-            result.add(getRandomChar(DIGITS));
-            q++;
-        }
-        // !!!!!!!! должно быть SPECIAL
-        //  Ошибка
-        if(useSpecial) {
-            result.add(getRandomChar(DIGITS));
-            q++;
+        char[] result = new char[length];
+        int index = 0;
+
+        if (useDigits) result[index++] = getRandomChar(DIGITS);
+        if (useSpecial) result[index++] = getRandomChar(SPECIAL);
+
+        for (; index < length; index++) {
+            result[index] = getRandomChar(alphabet.toString());
         }
 
-        // основной цикл генерации
-        for (int i = 0; i < length - q; i++) {
-            result.add(getRandomChar(alphabet.toString()));
+        for (int i = result.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            char temp = result[i];
+            result[i] = result[j];
+            result[j] = temp;
         }
 
-        // перемешивание
-        Collections.shuffle(result);
-        StringBuilder password = new StringBuilder();
-        for (Character c : result) {
-            password.append(c);
-        }
 
-        return password.toString();
+
+        return new String(result);
     }
+
 
     // проверка на надёжность ( минимум 8 символов, цифры, заглавные, сец.с )
     public boolean isStrongPassword(String password) {

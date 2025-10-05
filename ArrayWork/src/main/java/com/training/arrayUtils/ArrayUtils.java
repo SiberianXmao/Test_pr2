@@ -1,20 +1,17 @@
 package com.training.arrayUtils;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ArrayUtils {
-
 
     // поиск максимального элемента
     public static int findMax(int[] arr){
         if (arr == null || arr.length == 0)
             throw new IllegalArgumentException("Массив пустой или null");
+
         int max = arr[0];
-        for (int num : arr) {
-            if (num > max) max = num;
+        for (int i = 0; i < arr.length; i++) {  // используем индекс вместо for-each
+            if (arr[i] > max) max = arr[i];
         }
         return max;
     }
@@ -23,9 +20,10 @@ public class ArrayUtils {
     public static int findMin(int[] arr){
         if (arr == null || arr.length == 0)
             throw new IllegalArgumentException("Массив пустой или null");
+
         int min = arr[0];
-        for (int num : arr) {
-            if (num < min) min = num;
+        for (int i = 0; i < arr.length; i++) { // используем индекс вместо for-each
+            if (arr[i] < min) min = arr[i];
         }
         return min;
     }
@@ -37,19 +35,15 @@ public class ArrayUtils {
         int[] copy = Arrays.copyOf(arr, arr.length);
         Arrays.sort(copy);
         return copy;
-    };
+    }
 
     // сортировка по убыванию
-    // Ошибка - забудем сделать реверс
     public static int[] sortDescending(int[] arr){
         if (arr == null) return new int[0];
 
         int[] copy = Arrays.copyOf(arr, arr.length);
         Arrays.sort(copy);
-
-        // !!!!!!!!!
-        //reverse(copy);
-
+        reverse(copy);
         return copy;
     }
 
@@ -57,9 +51,10 @@ public class ArrayUtils {
     public static int average(int[] arr){
         if (arr == null || arr.length == 0)
             throw new IllegalArgumentException("Массив пустой или null");
+
         int sum = 0;
-        for (int num : arr) {
-            sum += num;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
         }
         return sum / arr.length;
     }
@@ -71,5 +66,4 @@ public class ArrayUtils {
             arr[arr.length - 1 - i] = temp;
         }
     }
-
 }

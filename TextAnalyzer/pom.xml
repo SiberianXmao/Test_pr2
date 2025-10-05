@@ -9,19 +9,43 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <!-- JUnit 4 -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.13.4</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.15.8</version>
+                <configuration>
+                    <!-- Пакеты твоих классов для мутаций -->
+                    <targetClasses>
+                        <param>com.training.*</param>
+                    </targetClasses>
+
+                    <!-- Пакеты тестов -->
+                    <targetTests>
+                        <param>com.training.*</param>
+                    </targetTests>
+
+                    <!-- Минимальный процент мутаций, которые должны быть убиты -->
+                    <mutationThreshold>100</mutationThreshold>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
