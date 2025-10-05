@@ -40,13 +40,16 @@ public class ArrayUtils {
     };
 
     // сортировка по убыванию
+    // Ошибка - забудем сделать реверс
     public static int[] sortDescending(int[] arr){
         if (arr == null) return new int[0];
 
         int[] copy = Arrays.copyOf(arr, arr.length);
-
         Arrays.sort(copy);
-        reverse(copy);
+
+        // !!!!!!!!!
+        //reverse(copy);
+
         return copy;
     }
 

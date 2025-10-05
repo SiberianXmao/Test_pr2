@@ -14,6 +14,7 @@ public class PasswordGenerator {
     private static final Random random = new Random();
 
     // генерация случайного пароля
+    // Ошибка - неправильная переменная при генерации
     public String generatePassword(int length,boolean useDigits,
                                    boolean useSpecial) {
 
@@ -26,8 +27,9 @@ public class PasswordGenerator {
 
         // составление алфавита из условий
         alphabet.append(LOWER).append(UPPER);
+        // Ошибка - должно быть SPECIAL
         if (useDigits) {alphabet.append(DIGITS);}
-        if (useSpecial) {alphabet.append(SPECIAL);}
+        if (useSpecial) {alphabet.append(DIGITS);}
 
         List<Character> result = new ArrayList<>();
         // обязательное соблюдение необходимых условий
@@ -36,8 +38,10 @@ public class PasswordGenerator {
             result.add(getRandomChar(DIGITS));
             q++;
         }
+        // !!!!!!!! должно быть SPECIAL
+        //  Ошибка
         if(useSpecial) {
-            result.add(getRandomChar(SPECIAL));
+            result.add(getRandomChar(DIGITS));
             q++;
         }
 

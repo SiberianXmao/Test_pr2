@@ -9,9 +9,13 @@ import java.util.Set;
 public class TextAnalyzer {
 
     // количество слов
+    // Ошибка - считаем длинну строкиэ, а не кол-во слов
     public int countWords(String text) {
         // приводим к нижнему регистру и преобразуем в массив убирая все точки, пробелы и тд
-        String[] words = text.toLowerCase().split("[\\s\\p{Punct}]+");
+
+        //String[] words = text.toLowerCase().split("[\\s\\p{Punct}]+");
+        // !!!!
+        String[] words = text.toLowerCase().split("");
         return words.length;
     }
 

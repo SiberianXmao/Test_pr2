@@ -5,9 +5,13 @@ package com.training.stringUtils;
 public class StringUtils {
 
     // проверка палиндрома
+    // Ошибка - не убираем пробелы и пунктуацию
     public static boolean isPalindrome(String str) {
         if (str == null) return false;
-        String clean = str.replaceAll("[\\s\\p{Punct}]", "").toLowerCase();
+        
+        // !!!!!!
+        String clean = str.toLowerCase(); // str.replaceAll("[\\s\\p{Punct}]", "").toLowerCase();
+
         String reversed = new StringBuilder(clean).reverse().toString();
         return clean.equals(reversed);
     }

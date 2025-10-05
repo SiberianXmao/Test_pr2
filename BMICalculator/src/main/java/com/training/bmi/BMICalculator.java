@@ -4,12 +4,13 @@ package com.training.bmi;
 public class BMICalculator {
 
      // Рассчитывает индекс массы тела по формуле: вес (кг) / (рост (м))^2
+    // Ошибка - математическа операция
     public double calculateBMI(double weightKg, double heightM) {
         if (weightKg <= 0 || heightM <= 0) {
             throw new IllegalArgumentException("Вес и рост должны быть положительными числами.");
         }
         // Преднамеренная ошибка: heightM умножается на 3 вместо квадрата
-        return weightKg / (Math.pow(heightM, 2));
+        return weightKg / (heightM * 3);  // (Math.pow(heightM, 2));
     }
 
 
