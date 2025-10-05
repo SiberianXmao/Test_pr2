@@ -7,35 +7,43 @@
     <groupId>com.training</groupId>
     <artifactId>z1</artifactId>
     <version>1.0-SNAPSHOT</version>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.pitest</groupId>-->
+<!--                <artifactId>pitest-maven</artifactId>-->
+<!--                <version>LATEST</version>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
     <build>
         <plugins>
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.15.0</version>
+                <version>1.15.8</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.pitest</groupId>
                         <artifactId>pitest-junit5-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <version>0.15</version>
                     </dependency>
                 </dependencies>
                 <configuration>
                     <targetClasses>
-                        <param>com.training.bmi.*</param>
+                        <param>com.training.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>com.training.bmi.*Test</param>
+                        <param>com.training.*</param>
                     </targetTests>
-                    <mutationThreshold>80</mutationThreshold>
-                    <outputFormats>
-                        <param>HTML</param>
-                        <param>XML</param>
-                    </outputFormats>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+
+
+
 
 
     <properties>

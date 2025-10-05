@@ -18,9 +18,9 @@ public class BMICalculator {
     public String getBMICategory(double bmi) {
         if (bmi < 18.5) {
             return "Недостаточный вес";
-        } else if (bmi < 24.9) {
+        } else if (bmi <= 24.9) {
             return "Норма";
-        } else if (bmi < 29.9) {
+        } else if (bmi <= 29.9) {
             return "Избыточный вес";
         } else {
             return "Ожирение";
